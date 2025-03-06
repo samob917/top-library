@@ -19,13 +19,6 @@ function addBookToLibrary(title, pages, author, read) {
 }
 
 
-console.log(myLibrary);
-addBookToLibrary("You Like It Darker", 450, "Stephen King", true);
-addBookToLibrary("Number Go Up", 260, "Zeke Faux", false);
-addBookToLibrary("Number Go Up", 260, "Zeke Faux", true);
-addBookToLibrary("Number Go Up", 260, "Zeke Faux", false);
-addBookToLibrary("Number Go Up", 260, "Zeke Faux", false);
-addBookToLibrary("Number Go Up", 260, "Zeke Faux", false);
 
 function handleDelete(e) {
     const parentDiv = e.target.parentNode;
@@ -84,7 +77,6 @@ function displayLibrary() {
 }
 
 displayLibrary();
-console.log(myLibrary);
 
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog + button");
