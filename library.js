@@ -26,6 +26,9 @@ console.log(myLibrary);
 
 function displayLibrary() {
     const library = document.querySelector(".lib");
+    while(library.firstChild){
+        library.removeChild(library.firstChild);
+    }
     for (book of myLibrary) {
         const bookDiv = document.createElement("div");
         // bookDiv.setAttribute("id", )
@@ -50,7 +53,6 @@ function displayLibrary() {
 
 displayLibrary();
 
-
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog + button");
 const closeButton = document.querySelector("dialog .close-dialog");
@@ -62,3 +64,18 @@ showButton.addEventListener("click", () => {
 closeButton.addEventListener("click", () => {
     dialog.close();
 });
+
+const submitButton = document.querySelector(".form-submit")
+
+submitButton.addEventListener("click", () => {
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    const read = document.querySelector("#read").checked;
+    addBookToLibrary(title, pages, author, read);
+    displayLibrary();
+    console.log(myLibrary);
+    event.preventDefault();
+    dialog.close();
+    document.querySelector("form").reset();
+})
