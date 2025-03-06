@@ -10,7 +10,18 @@
     <h1>Welcome to my library!</h1>
     <dialog>
         <h2>Enter your new book!</h2>
-        <button>Close</button>
+        <form action="">
+            <input type="text" name="title" id="title">
+            <label for="title"> Book Title</label>
+            <input type="text" name="author" id="author">
+            <label for="author">Author</label>
+            <input type="number" name="pages" id="pages">
+            <label for="pages">Pages</label>
+            <input type="checkbox" name="read" id="read">
+            <label for="read">Read?</label>
+            <button>Add Book</button>
+        </form>
+        <button class="close-dialog">Close</button>
     </dialog>
     <button>Add Book</button>
 

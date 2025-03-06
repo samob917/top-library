@@ -53,7 +53,7 @@ displayLibrary();
 
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog + button");
-const closeButton = document.querySelector("dialog button");
+const closeButton = document.querySelector("dialog .close-dialog");
 
 showButton.addEventListener("click", () => {
     dialog.showModal();
