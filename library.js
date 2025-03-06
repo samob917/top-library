@@ -8,12 +8,16 @@ function Book(title, pages, author, read) {
     this.details = function() {
         return `${this.title}, by ${this.author}, is ${this.pages} long.`
     };
+    this.toggleRead = function() {
+        this.read = !this.read;
+    };
 }
 
 function addBookToLibrary(title, pages, author, read) {
     const newBook = new Book(title, pages, author, read);
     myLibrary.push(newBook);
 }
+
 
 console.log(myLibrary);
 addBookToLibrary("You Like It Darker", 450, "Stephen King", true);
@@ -29,6 +33,13 @@ function handleDelete(e) {
     library.removeChild(parentDiv);
     const id = parentDiv.dataset.indexNumber;
     myLibrary = myLibrary.filter(book => book.id != id)
+}
+
+function handleRead(e) {
+    const bookDiv = e.target.parentNode;
+    const id = bookDiv.dataset.indexNumber;
+    const books = myLibrary.filter(book => book.id === id).map(book => book.toggleRead());
+    displayLibrary();
 }
 
 function displayLibrary() {
@@ -59,9 +70,14 @@ function displayLibrary() {
         removeBook.textContent = "Remove";
         removeBook.addEventListener("click", handleDelete);
 
+        const readButton = document.createElement("button");
+        readButton.textContent = "Read"
+        readButton.addEventListener("click", handleRead);
+
         bookDiv.appendChild(bookTitle);
         bookDiv.appendChild(bookAuthor);
         bookDiv.appendChild(bookPages);
+        bookDiv.appendChild(readButton);
         bookDiv.appendChild(removeBook);
         library.appendChild(bookDiv);
     }
