@@ -1,37 +1,55 @@
 let myLibrary = [];
 
-function Book(title, pages, author, read) {
-    this.title = title;
-    this.pages = pages;
-    this.author = author;
-    this.read = read;
-    this.details = function() {
+class Book {
+    constructor(title, pages, author, read) {
+        this.title = title;
+        this.pages = pages;
+        this.author = author;
+        this.read = read;
+    }
+
+    details() {
         return `${this.title}, by ${this.author}, is ${this.pages} long.`
-    };
-    this.toggleRead = function() {
+    }
+
+    toggleRead() {
         this.read = !this.read;
-    };
+    }
 }
 
-function addBookToLibrary(title, pages, author, read) {
-    const newBook = new Book(title, pages, author, read);
-    myLibrary.push(newBook);
+class Library {
+    constructor() {
+        this.library = [];
+    }
+
+    addBookToLibrary(title, pages, author, read) {
+        const newBook = new Book(title, pages, author, read);
+        this.library.push(newBook);
+    }
+
+    get books() {
+        return this.library;
+    }
+
+    set books(bookList) {
+        this.library = bookList;
+    }
 }
 
-
+lib = new Library();
 
 function handleDelete(e) {
     const parentDiv = e.target.parentNode;
     const library = parentDiv.parentNode;
     library.removeChild(parentDiv);
     const id = parentDiv.dataset.indexNumber;
-    myLibrary = myLibrary.filter(book => book.id != id)
+    lib.books = lib.books.filter(book => book.id != id)
 }
 
 function handleRead(e) {
     const bookDiv = e.target.parentNode;
     const id = bookDiv.dataset.indexNumber;
-    const books = myLibrary.filter(book => book.id === id).map(book => book.toggleRead());
+    const books = lib.books.filter(book => book.id === id).map(book => book.toggleRead());
     displayLibrary();
 }
 
@@ -40,7 +58,7 @@ function displayLibrary() {
     while(library.firstChild){
         library.removeChild(library.firstChild);
     }
-    for (book of myLibrary) {
+    for (book of lib.books) {
         let uuid = crypto.randomUUID();
         book.id = uuid;
         const bookDiv = document.createElement("div");
@@ -97,7 +115,7 @@ submitButton.addEventListener("click", () => {
     const author = document.querySelector("#author").value;
     const pages = document.querySelector("#pages").value;
     const read = document.querySelector("#read").checked;
-    addBookToLibrary(title, pages, author, read);
+    lib.addBookToLibrary(title, pages, author, read);
     displayLibrary();
     console.log(myLibrary);
     event.preventDefault();
